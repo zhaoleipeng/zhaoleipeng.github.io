@@ -16,7 +16,7 @@
 <meta property="og:description" content="数据库的一些问题 B+tree的N叉树，N是由什么决定的N叉树是由页大小和索引大小决定的">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://zhaoleipeng.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-07T05:25:15.277Z">
+<meta property="og:updated_time" content="2019-06-07T05:27:09.074Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库基础概念 索引">
 <meta name="twitter:description" content="数据库的一些问题 B+tree的N叉树，N是由什么决定的N叉树是由页大小和索引大小决定的">
@@ -184,15 +184,15 @@
 <a id="more"></a>
 </li>
 <li><p><strong>删除数据后索引不会被删除，表大小10G，索引大小30G，</strong></p>
-</li>
-</ul>
-<p>  如果是主键的话，重建表可以重建主键索引。</p>
+<p>如果是主键的话，重建表可以重建主键索引。</p>
 <blockquote>
 <p>因为无论删除主键和新增主键都会重建表，所以直接重建表</p>
 </blockquote>
-  <figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> T <span class="hljs-keyword">engine</span>=<span class="hljs-keyword">InnoDB</span></span><br></pre></td></tr></table></figure>
-<p>  如果是非主键索引，drop后添加即可。</p>
-  <figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> T <span class="hljs-keyword">drop</span> <span class="hljs-keyword">index</span> k;</span><br><span class="line"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> T <span class="hljs-keyword">add</span> <span class="hljs-keyword">index</span>(k);</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> T <span class="hljs-keyword">engine</span>=<span class="hljs-keyword">InnoDB</span></span><br></pre></td></tr></table></figure>
+<p>如果是非主键索引，drop后添加即可。</p>
+<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> T <span class="hljs-keyword">drop</span> <span class="hljs-keyword">index</span> k;</span><br><span class="line"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> T <span class="hljs-keyword">add</span> <span class="hljs-keyword">index</span>(k);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
         </div>
         
