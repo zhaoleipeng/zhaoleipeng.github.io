@@ -16,7 +16,7 @@
 <meta property="og:description" content="一、数据库事务的四个特性 ACIDAtomicity(原子性) Consistency(一致性) Isolution(隔离性) Durability(持久性)">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://zhaoleipeng.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-07T05:30:57.955Z">
+<meta property="og:updated_time" content="2019-06-07T05:31:32.259Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库基础概念">
 <meta name="twitter:description" content="一、数据库事务的四个特性 ACIDAtomicity(原子性) Consistency(一致性) Isolution(隔离性) Durability(持久性)">
@@ -196,7 +196,7 @@
 <li><p><strong>持久性</strong><br>事务只要提交了，数据库状态会永远发生变化，即使宕机了。</p>
 </li>
 </ul>
-<h2 id="二、隔离性特别说明"><a href="#二、隔离性特别说明" class="headerlink" title="二、隔离性特别说明"></a>二、隔离性特别说明</h2><h3 id="隔离引发的问题"><a href="#隔离引发的问题" class="headerlink" title="隔离引发的问题"></a>隔离引发的问题</h3><p><code>脏读(dirty read)</code> <code>不可重复读(non-repeatable rearead)</code> <code>幻读(phantom read)</code></p>
+<h2 id="二、隔离性特别说明"><a href="#二、隔离性特别说明" class="headerlink" title="二、隔离性特别说明"></a>二、隔离性特别说明</h2><h3 id="隔离引发的问题"><a href="#隔离引发的问题" class="headerlink" title="隔离引发的问题"></a>隔离引发的问题</h3><p><code>脏读(dirty read)</code> <code>不可重复读(non-repeatable read)</code> <code>幻读(phantom read)</code></p>
 <h3 id="隔离的四个级别"><a href="#隔离的四个级别" class="headerlink" title="隔离的四个级别"></a>隔离的四个级别</h3><p><code>读未提交(read uncommitted)</code> <code>读提交(read committed)</code> <code>可重复读(repeatable read)</code> <code>串行化(serializable)</code></p>
 <ul>
 <li><p><strong>读未提交</strong><br>一个事务还没提交时，变更就可以被别的事务看到。</p>
