@@ -2,19 +2,24 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>分类: 杂谈 - 赵磊鹏的小站</title>
+<title>数据库基础概念 索引 - 赵磊鹏的小站</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="赵磊鹏的小站">
-<meta property="og:url" content="https://zhaoleipeng.github.io/categories/杂谈/index.html">
+    <meta name="description" content="数据库的一些问题 B+tree的N叉树，N是由什么决定的N叉树是由页大小和索引大小决定的">
+<meta name="keywords" content="数据库,索引,MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库基础概念 索引">
+<meta property="og:url" content="https://zhaoleipeng.github.io/2019/06/07/database-more/index.html">
 <meta property="og:site_name" content="赵磊鹏的小站">
+<meta property="og:description" content="数据库的一些问题 B+tree的N叉树，N是由什么决定的N叉树是由页大小和索引大小决定的">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://zhaoleipeng.github.io/images/og_image.png">
+<meta property="og:updated_time" content="2019-06-07T05:25:15.277Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="赵磊鹏的小站">
+<meta name="twitter:title" content="数据库基础概念 索引">
+<meta name="twitter:description" content="数据库的一些问题 B+tree的N叉树，N是由什么决定的N叉树是由页大小和索引大小决定的">
 <meta name="twitter:image" content="https://zhaoleipeng.github.io/images/og_image.png">
 
 
@@ -93,7 +98,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/og_image1.png" alt="赵磊鹏的小站" height="28">
+                <img src="/images/og_image1.png" alt="数据库基础概念 索引" height="28">
             
             </a>
         </div>
@@ -123,6 +128,10 @@
                     
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -137,57 +146,65 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/categories">分类</a></li>
-            
-            <li class="is-active"><a href="#" aria-current="page">杂谈</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-24T08:02:12.000Z">2019-05-24</time>
+                <time class="level-item has-text-grey" datetime="2019-06-07T05:16:57.000Z">2019-06-07</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/杂谈/">杂谈</a>
+                <a class="has-link-grey -link" href="/categories/技术/">技术</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    1 小时 读完 (大约 11051 个字)
+                    1 分钟 读完 (大约 145 个字)
                 </span>
                 
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
                 
             </div>
         </div>
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/05/24/start-up-business/">创业的一些参考</a>
+                数据库基础概念 索引
             
         </h1>
         <div class="content">
-            <p>今天的这篇文章从反常识的数据开始谈起，基于<strong>中国的机遇与优势、实体经济、改变偏见，下沉市场、海外市场，新金融时代</strong>等板块，展开对新商业文明时代的看法。<br></p>
+            <h2 id="数据库的一些问题"><a href="#数据库的一些问题" class="headerlink" title="数据库的一些问题"></a>数据库的一些问题</h2><ul>
+<li><p><strong>B+tree的N叉树，N是由什么决定的</strong><br>N叉树是由页大小和索引大小决定的</p>
+<a id="more"></a>
+</li>
+<li><p><strong>删除数据后索引不会被删除，表大小10G，索引大小30G，</strong></p>
+</li>
+</ul>
+<p>  如果是主键的话，重建表可以重建主键索引。</p>
+<blockquote>
+<p>因为无论删除主键和新增主键都会重建表，所以直接重建表</p>
+</blockquote>
+  <figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> T <span class="hljs-keyword">engine</span>=<span class="hljs-keyword">InnoDB</span></span><br></pre></td></tr></table></figure>
+<p>  如果是非主键索引，drop后添加即可。</p>
+  <figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> T <span class="hljs-keyword">drop</span> <span class="hljs-keyword">index</span> k;</span><br><span class="line"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> T <span class="hljs-keyword">add</span> <span class="hljs-keyword">index</span>(k);</span><br></pre></td></tr></table></figure>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/05/24/start-up-business/#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/MySQL/">MySQL</a>, <a class="has-link-grey -link" href="/tags/数据库/">数据库</a>, <a class="has-link-grey -link" href="/tags/索引/">索引</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -197,7 +214,19 @@
 
 
 
-
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/06/06/database-basic/">
+                <span class="level-item">数据库基础概念</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
 </div>
@@ -278,6 +307,20 @@
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#数据库的一些问题">
+        <span>数据库的一些问题</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 
@@ -770,7 +813,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/og_image1.png" alt="赵磊鹏的小站" height="28">
+                    <img src="/images/og_image1.png" alt="数据库基础概念 索引" height="28">
                 
                 </a>
                 <p class="is-size-7">
