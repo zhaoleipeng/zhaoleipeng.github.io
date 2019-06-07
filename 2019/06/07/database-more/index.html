@@ -16,7 +16,7 @@
 <meta property="og:description" content="常见的索引类型 MySQL的索引B+Tree 和 BTree">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://zhaoleipeng.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-07T05:34:24.122Z">
+<meta property="og:updated_time" content="2019-06-07T06:59:53.945Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库基础概念 索引">
 <meta name="twitter:description" content="常见的索引类型 MySQL的索引B+Tree 和 BTree">
@@ -161,7 +161,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 163 个字)
+                    4 分钟 读完 (大约 536 个字)
                 </span>
                 
                 
@@ -189,10 +189,10 @@
 <li><p><strong>BTree</strong></p>
 </li>
 </ul>
-<h2 id="数据库的一些问题"><a href="#数据库的一些问题" class="headerlink" title="数据库的一些问题"></a>数据库的一些问题</h2><ul>
+<h2 id="数据库的一些短问题"><a href="#数据库的一些短问题" class="headerlink" title="数据库的一些短问题"></a>数据库的一些短问题</h2><ul>
 <li><p><strong>B+tree的N叉树，N是由什么决定的</strong><br>N叉树是由页大小和索引大小决定的</p>
 </li>
-<li><p><strong>删除数据后索引不会被删除，表大小10G，索引大小30G，</strong></p>
+<li><p><strong>删除数据后索引不会被删除</strong><br>某种情况下导致一个项目的数据库表大小10G，索引大小30G。</p>
 <p>如果是主键的话，重建表可以重建主键索引。</p>
 <blockquote>
 <p>因为无论删除主键和新增主键都会重建表，所以直接重建表</p>
@@ -202,6 +202,149 @@
 <figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> T <span class="hljs-keyword">drop</span> <span class="hljs-keyword">index</span> k;</span><br><span class="line"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> T <span class="hljs-keyword">add</span> <span class="hljs-keyword">index</span>(k);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<h2 id="数据库的一些长问题"><a href="#数据库的一些长问题" class="headerlink" title="数据库的一些长问题"></a>数据库的一些长问题</h2><p>一个表结构定义如下的一张表</p>
+<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-string">`geek`</span> (</span><br><span class="line"><span class="hljs-string">`a`</span> <span class="hljs-built_in">int</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,</span><br><span class="line"><span class="hljs-string">`b`</span> <span class="hljs-built_in">int</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,</span><br><span class="line"><span class="hljs-string">`c`</span> <span class="hljs-built_in">int</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,</span><br><span class="line"><span class="hljs-string">`d`</span> <span class="hljs-built_in">int</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,</span><br><span class="line">PRIMARY <span class="hljs-keyword">KEY</span> (<span class="hljs-string">`a`</span>,<span class="hljs-string">`b`</span>),</span><br><span class="line"><span class="hljs-keyword">KEY</span> <span class="hljs-string">`c`</span> (<span class="hljs-string">`c`</span>),</span><br><span class="line"><span class="hljs-keyword">KEY</span> <span class="hljs-string">`ca`</span> (<span class="hljs-string">`c`</span>,<span class="hljs-string">`a`</span>),</span><br><span class="line"><span class="hljs-keyword">KEY</span> <span class="hljs-string">`cb`</span> (<span class="hljs-string">`c`</span>,<span class="hljs-string">`b`</span>)</span><br><span class="line">) <span class="hljs-keyword">ENGINE</span>=<span class="hljs-keyword">InnoDB</span>;</span><br></pre></td></tr></table></figure>
+<p>但是既然主键包含了 a、b 这两个字段，那意味着单独在字段 c 上创建一个索引，就已经包含了三个字段了呀，为什么要创建<code>“ca”`</code>“cb”`这两个索引？</p>
+<p>如果为了解决如下使用场景添加的索引是否合理。</p>
+<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> geek <span class="hljs-keyword">where</span> c=N <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> a <span class="hljs-keyword">limit</span> <span class="hljs-number">1</span>;</span><br><span class="line"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> geek <span class="hljs-keyword">where</span> c=N <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> b <span class="hljs-keyword">limit</span> <span class="hljs-number">1</span>;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>答案如下：</p>
+<p>表记录</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">a</th>
+<th style="text-align:center">b</th>
+<th style="text-align:center">c</th>
+<th style="text-align:center">d</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">d</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">d</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">d</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">d</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">d</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">d</td>
+</tr>
+</tbody>
+</table>
+<p>  主键 <code>a，b</code> 的聚簇索引组织顺序相当于 <code>order by a,b</code>，也就是先按 <code>a</code> 排序，再按 <code>b</code> 排序，<code>c</code> 无序。</p>
+<p>  索引 <code>ca</code> 的组织是先按 <code>c</code> 排序，再按 <code>a</code> 排序，同时记录<code>主键</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">c</th>
+<th style="text-align:center">a</th>
+<th style="text-align:center">主键部分b <code>（注意，这里不是ab，而是只有 b）</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">3</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">3</td>
+</tr>
+</tbody>
+</table>
+<p>  这个跟索引 c 的数据是一模一样的。</p>
+<p>  索引 <code>cb</code> 的组织是先按 <code>c</code> 排序，在按 <code>b</code> 排序，同时记录<code>主键</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">c</th>
+<th style="text-align:center">b</th>
+<th style="text-align:center">主键部分a<code>（注意，这里不是 ab，而是只有 a）</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">2</td>
+</tr>
+</tbody>
+</table>
+<p>  所以，结论是 <code>ca</code> 可以去掉，<code>cb</code> 需要保留。</p>
 
         </div>
         
@@ -326,8 +469,11 @@
         <a class="is-flex" href="#常见的索引类型">
         <span>常见的索引类型</span>
         </a></li><li>
-        <a class="is-flex" href="#数据库的一些问题">
-        <span>数据库的一些问题</span>
+        <a class="is-flex" href="#数据库的一些短问题">
+        <span>数据库的一些短问题</span>
+        </a></li><li>
+        <a class="is-flex" href="#数据库的一些长问题">
+        <span>数据库的一些长问题</span>
         </a></li></ul>
         </div>
     </div>
