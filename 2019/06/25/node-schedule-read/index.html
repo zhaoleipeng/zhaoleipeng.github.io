@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="zh">
-<head><meta name="generator" content="Hexo 3.8.0">
-    <meta charset="utf-8">
-<title>node-schedule的一些分析 - 赵磊鹏的小站</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
 
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>node-schedule的一些分析 - 赵磊鹏的小站</title>
 
 
     <meta name="description" content="先介绍下这个包是干嘛的 node-schedule是一个A cron-like and not-cron-like job scheduler for Node  这个包可以做到在node环境中实现定时触发某些任务的效果。 使用方法在github文档里面都找的到我这里就不赘述了。 为啥会找到这个包因为项目无法自动化。定时任务部分的设置，在上线的时候需要手动的在服务器的cron上面去设置，所以成为了">
@@ -16,7 +19,7 @@
 <meta property="og:description" content="先介绍下这个包是干嘛的 node-schedule是一个A cron-like and not-cron-like job scheduler for Node  这个包可以做到在node环境中实现定时触发某些任务的效果。 使用方法在github文档里面都找的到我这里就不赘述了。 为啥会找到这个包因为项目无法自动化。定时任务部分的设置，在上线的时候需要手动的在服务器的cron上面去设置，所以成为了">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://zhaoleipeng.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-25T06:07:40.186Z">
+<meta property="og:updated_time" content="2019-09-20T06:14:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="node-schedule的一些分析">
 <meta name="twitter:description" content="先介绍下这个包是干嘛的 node-schedule是一个A cron-like and not-cron-like job scheduler for Node  这个包可以做到在node环境中实现定时触发某些任务的效果。 使用方法在github文档里面都找的到我这里就不赘述了。 为啥会找到这个包因为项目无法自动化。定时任务部分的设置，在上线的时候需要手动的在服务器的cron上面去设置，所以成为了">
@@ -28,7 +31,7 @@
 
 
 
-<link rel="icon" href="/images/icon.png">
+<link rel="icon" href="/images/avatar.png">
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
@@ -80,11 +83,7 @@
     
     
     
-
-    
-    
-    
-        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     
 
     
@@ -106,13 +105,17 @@
             
             <div class="navbar-start">
                 
-                <a class="navbar-item" href="/">home</a>
+                <a class="navbar-item"
+                href="/">Home</a>
                 
-                <a class="navbar-item" href="/archives">archives</a>
+                <a class="navbar-item"
+                href="/archives">Archives</a>
                 
-                <a class="navbar-item" href="/categories">categories</a>
+                <a class="navbar-item"
+                href="/categories">Categories</a>
                 
-                <a class="navbar-item" href="/tags">tags</a>
+                <a class="navbar-item"
+                href="/tags">Tags</a>
                 
             </div>
             
@@ -225,6 +228,13 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/09/20/install-mysql/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">macos上安装mysql</span>
+            </a>
+        </div>
+        
         
         <div class="level-end">
             <a class="level level-item has-link-grey  article-nav-next" href="/2019/06/07/database-more/">
@@ -249,11 +259,12 @@
 <div class="card widget">
     <div class="card-content">
         <nav class="level">
-            <div class="level-item has-text-centered">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
                 <div>
                     
-                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="invokerll">
-                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/avatar.png" alt="invokerll">
+                    </figure>
                     
                     <p class="is-size-4 is-block">
                         invokerll
@@ -280,7 +291,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        7
+                        8
                     </p>
                 </div>
             </div>
@@ -323,21 +334,27 @@
             </h3>
             <ul class="menu-list"><li>
         <a class="is-flex" href="#先介绍下这个包是干嘛的">
+        <span class="has-mr-6">1</span>
         <span>先介绍下这个包是干嘛的</span>
         </a></li><li>
         <a class="is-flex" href="#为啥会找到这个包">
+        <span class="has-mr-6">2</span>
         <span>为啥会找到这个包</span>
         </a></li><li>
         <a class="is-flex" href="#具体的应用场景">
+        <span class="has-mr-6">3</span>
         <span>具体的应用场景</span>
         </a></li><li>
         <a class="is-flex" href="#产生了疑惑">
+        <span class="has-mr-6">4</span>
         <span>产生了疑惑</span>
         </a></li><li>
         <a class="is-flex" href="#源码的观察">
+        <span class="has-mr-6">5</span>
         <span>源码的观察</span>
         </a></li><li>
         <a class="is-flex" href="#结论">
+        <span class="has-mr-6">6</span>
         <span>结论</span>
         </a></li></ul>
         </div>
@@ -387,7 +404,7 @@
                 <span class="level-item">技术</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">5</span>
+                <span class="level-item tag">6</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/日记/">
@@ -436,8 +453,21 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-20T06:26:08.000Z">2019-09-20</time></div>
+                    <a href="/2019/09/20/install-mysql/" class="title has-link-black-ter is-size-6 has-text-weight-normal">macos上安装mysql</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/技术/">技术</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-25T05:41:59.000Z">2019-06-25</time></div>
-                    <a href="/2019/06/25/node-schedule-read/" class="has-link-black-ter is-size-6">node-schedule的一些分析</a>
+                    <a href="/2019/06/25/node-schedule-read/" class="title has-link-black-ter is-size-6 has-text-weight-normal">node-schedule的一些分析</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/技术/">技术</a>
                     </p>
@@ -450,7 +480,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-07T05:16:57.000Z">2019-06-07</time></div>
-                    <a href="/2019/06/07/database-more/" class="has-link-black-ter is-size-6">数据库基础概念 索引</a>
+                    <a href="/2019/06/07/database-more/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据库基础概念 索引</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/技术/">技术</a>
                     </p>
@@ -463,7 +493,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-06T09:24:27.000Z">2019-06-06</time></div>
-                    <a href="/2019/06/06/database-basic/" class="has-link-black-ter is-size-6">数据库基础概念</a>
+                    <a href="/2019/06/06/database-basic/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据库基础概念</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/技术/">技术</a>
                     </p>
@@ -476,20 +506,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-30T02:02:41.000Z">2019-05-30</time></div>
-                    <a href="/2019/05/30/something-about-mq/" class="has-link-black-ter is-size-6">消息队列（一）：基础介绍</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/技术/">技术</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-24T10:07:41.000Z">2019-05-24</time></div>
-                    <a href="/2019/05/24/redis-basic/" class="has-link-black-ter is-size-6">REDIS（一）：基础介绍</a>
+                    <a href="/2019/05/30/something-about-mq/" class="title has-link-black-ter is-size-6 has-text-weight-normal">消息队列（一）：基础介绍</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/技术/">技术</a>
                     </p>
@@ -508,6 +525,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/06/">
@@ -582,7 +610,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/数据库/">
                         <span class="tag">数据库</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -655,8 +683,21 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-20T06:26:08.000Z">2019-09-20</time></div>
+                    <a href="/2019/09/20/install-mysql/" class="title has-link-black-ter is-size-6 has-text-weight-normal">macos上安装mysql</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/技术/">技术</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-25T05:41:59.000Z">2019-06-25</time></div>
-                    <a href="/2019/06/25/node-schedule-read/" class="has-link-black-ter is-size-6">node-schedule的一些分析</a>
+                    <a href="/2019/06/25/node-schedule-read/" class="title has-link-black-ter is-size-6 has-text-weight-normal">node-schedule的一些分析</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/技术/">技术</a>
                     </p>
@@ -669,7 +710,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-07T05:16:57.000Z">2019-06-07</time></div>
-                    <a href="/2019/06/07/database-more/" class="has-link-black-ter is-size-6">数据库基础概念 索引</a>
+                    <a href="/2019/06/07/database-more/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据库基础概念 索引</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/技术/">技术</a>
                     </p>
@@ -682,7 +723,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-06T09:24:27.000Z">2019-06-06</time></div>
-                    <a href="/2019/06/06/database-basic/" class="has-link-black-ter is-size-6">数据库基础概念</a>
+                    <a href="/2019/06/06/database-basic/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据库基础概念</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/技术/">技术</a>
                     </p>
@@ -695,20 +736,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-30T02:02:41.000Z">2019-05-30</time></div>
-                    <a href="/2019/05/30/something-about-mq/" class="has-link-black-ter is-size-6">消息队列（一）：基础介绍</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/技术/">技术</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-24T10:07:41.000Z">2019-05-24</time></div>
-                    <a href="/2019/05/24/redis-basic/" class="has-link-black-ter is-size-6">REDIS（一）：基础介绍</a>
+                    <a href="/2019/05/30/something-about-mq/" class="title has-link-black-ter is-size-6 has-text-weight-normal">消息队列（一）：基础介绍</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/技术/">技术</a>
                     </p>
@@ -727,6 +755,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/06/">
@@ -801,7 +840,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/数据库/">
                         <span class="tag">数据库</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -869,7 +908,8 @@
                 </a>
                 <p class="is-size-7">
                 &copy; 2019 invoker&nbsp;
-                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
                 <br>
                 <span id="busuanzi_container_site_uv">
@@ -900,6 +940,21 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
 <script>moment.locale("zh-CN");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
 
 
     
@@ -984,13 +1039,6 @@ document.addEventListener('DOMContentLoaded', function () {
     
     
     
-    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
-    <script src="/js/clipboard.js" defer></script>
-    
-
-    
-    
-    
 
     
 
@@ -998,35 +1046,35 @@ document.addEventListener('DOMContentLoaded', function () {
 <script src="/js/main.js" defer></script>
 
     
-    <link rel="stylesheet" href="/css/search.css">
-<div class="searchbox">
-    <div class="searchbox-container">
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <form class="search-form">
-                <input name="wd" type="text" class="searchbox-input" placeholder="想要查找什么...">
-                <span class="searchbox-close searchbox-selectable"><i class="fa fa-times-circle"></i></span>
-            </form>
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
         </div>
     </div>
 </div>
 <script>
-    (function ($) {
-        $('.search-form').on('submit', function (e) {
-            var keyword = $('.searchbox-input[name="wd"]').val();
-            window.location = 'https://www.baidu.com/s?wd=site:zhaoleipeng.github.io ' + keyword;
-            return false;
-        });
-    })(jQuery);
-    (function (document, $) {
-        $(document).on('click', '.navbar-main .search', function () {
-            $('.searchbox').toggleClass('show');
-        }).on('click', '.searchbox .searchbox-mask', function () {
-            $('.searchbox').removeClass('show');
-        }).on('click', '.searchbox-close', function () {
-            $('.searchbox').removeClass('show');
-        });
-    })(document, jQuery);
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
 </script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
     
 </body>
 </html>

@@ -7,22 +7,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>消息队列（一）：基础介绍 - 赵磊鹏的小站</title>
+<title>macos上安装mysql - 赵磊鹏的小站</title>
 
 
-    <meta name="description" content="一.消息模型 点对点消息生产者向消息队列中发送消息，只能被消费一次">
-<meta name="keywords" content="消息队列,设计">
+    <meta name="description" content="整体安装是当下最新版的mysql是8.0.17，不能保证其他版本兼容。">
+<meta name="keywords" content="数据库">
 <meta property="og:type" content="article">
-<meta property="og:title" content="消息队列（一）：基础介绍">
-<meta property="og:url" content="https://zhaoleipeng.github.io/2019/05/30/something-about-mq/index.html">
+<meta property="og:title" content="macos上安装mysql">
+<meta property="og:url" content="https://zhaoleipeng.github.io/2019/09/20/install-mysql/index.html">
 <meta property="og:site_name" content="赵磊鹏的小站">
-<meta property="og:description" content="一.消息模型 点对点消息生产者向消息队列中发送消息，只能被消费一次">
+<meta property="og:description" content="整体安装是当下最新版的mysql是8.0.17，不能保证其他版本兼容。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://zhaoleipeng.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-09-20T06:14:24.000Z">
+<meta property="og:updated_time" content="2019-09-25T07:15:37.906Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="消息队列（一）：基础介绍">
-<meta name="twitter:description" content="一.消息模型 点对点消息生产者向消息队列中发送消息，只能被消费一次">
+<meta name="twitter:title" content="macos上安装mysql">
+<meta name="twitter:description" content="整体安装是当下最新版的mysql是8.0.17，不能保证其他版本兼容。">
 <meta name="twitter:image" content="https://zhaoleipeng.github.io/images/og_image.png">
 
 
@@ -97,7 +97,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/og_image1.png" alt="消息队列（一）：基础介绍" height="28">
+                <img src="/images/og_image1.png" alt="macos上安装mysql" height="28">
             
             </a>
         </div>
@@ -154,7 +154,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-30T02:02:41.000Z">2019-05-30</time>
+                <time class="level-item has-text-grey" datetime="2019-09-20T06:26:08.000Z">2019-09-20</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/技术/">技术</a>
@@ -164,7 +164,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    8 分钟 读完 (大约 1168 个字)
+                    1 分钟 读完 (大约 220 个字)
                 </span>
                 
                 
@@ -178,67 +178,26 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                消息队列（一）：基础介绍
+                macos上安装mysql
             
         </h1>
         <div class="content">
-            <h2 id="一-消息模型"><a href="#一-消息模型" class="headerlink" title="一.消息模型"></a>一.消息模型</h2><ul>
-<li><strong>点对点</strong><br>消息生产者向消息队列中发送消息，只能被消费一次</li>
-</ul>
-<p><img src="/images/发布订阅.png" alt></p>
+            <p>整体安装是当下最新版的<code>mysql</code>是<code>8.0.17</code>，不能保证其他版本兼容。</p>
 <a id="more"></a>
-<ul>
-<li><strong>发布/订阅</strong>和观察者模式有以下不同</li>
-</ul>
-<blockquote>
-<ol>
-<li>观察者模式中，观察者和主题都知道对方的存在，而发布订阅模式中，生产者和消费者不知道对方的存在，他们通过频道通信</li>
-<li>观察者模式是同步的，当时间触发时，主题会调用观察者方法，然后等待方法返回。而发布与订阅模式是异步的，生产者向频道发送一个消息后，就不需要关心消费者何时去订阅这个消息，可以立即返回。</li>
-</ol>
-</blockquote>
-<p><img src="/images/发布订阅与观察者区别.png" alt></p>
-<h2 id="二-使用场景"><a href="#二-使用场景" class="headerlink" title="二.使用场景"></a>二.使用场景</h2><ul>
-<li><p><strong>异步处理</strong><br>发送者将消息发送给消息队列之后，不需要同步等待消息接收者处理完毕，而是立即返回进行其它操作。消息接收者从消息队列中订阅消息之后异步处理。</p>
-<p>例如在注册流程中通常需要发送验证邮件来确保注册用户身份的合法性，可以使用消息队列使发送验证邮件的操作异步处理，用户在填写完注册信息之后就可以完成注册，而将发送验证邮件这一消息发送到消息队列中。</p>
-<p>只有在业务流程允许异步处理的情况下才能这么做，例如上面的注册流程中，如果要求用户对验证邮件进行点击之后才能完成注册的话，就不能再使用消息队列。</p>
-<p>后续可以添加更多的例子:</p>
-<p><code>日志处理</code><br><code>消息通讯（聊天室等）</code></p>
-</li>
-<li><p><strong>流量削峰</strong><br>在高并发的场景下，如果短时间有大量的请求到达会压垮服务器。</p>
-<p>可以将请求发送到消息队列中，服务器按照其处理能力从消息队列中订阅消息进行处理。</p>
-</li>
-<li><p><strong>应用解耦</strong><br>如果模块之间不直接进行调用，模块之间耦合度就会很低，那么修改一个模块或者新增一个模块对其它模块的影响会很小，从而实现可扩展性。</p>
-<p>通过使用消息队列，一个模块只需要向消息队列中发送消息，其它模块可以选择性地从消息队列中订阅消息从而完成调用。</p>
-</li>
-</ul>
-<h2 id="三-可靠性"><a href="#三-可靠性" class="headerlink" title="三.可靠性"></a>三.可靠性</h2><ul>
-<li><p><strong>发送端的可靠性</strong><br>发送端完成操作后一定能将消息成功发送到消息队列中。</p>
-<p>实现方法：在本地数据库建一张消息表，将消息数据与业务数据保存在同一数据库实例里，这样就可以利用本地数据库的事务机制。事务提交成功后，将消息表中的消息转移到消息队列中，若转移消息成功则删除消息表中的数据，否则继续重传。</p>
-</li>
-<li><p><strong>接收端的可靠性</strong><br>接收端能够从消息队列成功消费一次消息。</p>
-<p>两种实现方法：</p>
-</li>
-<li><p>保证接收端处理消息的业务逻辑具有幂等性：只要具有幂等性，那么消费多少次消息，最后处理的结果都是一样的。</p>
-</li>
-<li>保证消息具有唯一编号，并使用一张日志表来记录已经消费的消息编号。</li>
-</ul>
-<h2 id="四-优缺点"><a href="#四-优缺点" class="headerlink" title="四.优缺点"></a>四.优缺点</h2><ul>
-<li><p><strong>优点</strong><br>解耦: 每个成员不必受其他成员影响，可以更独立自主，只通过一个简单的容器来联系。<br>提速: 其实就是支持异步操作，能节约大量时间<br>广播: 新同伴新加入成本很低<br>削峰: 遇上突然的大量请求，只需要在多久时间内处理完成即可。</p>
-</li>
-<li><p><strong>缺点</strong><br>引入复杂度: 需要地方防止，也需要考虑安全性。<br>暂时的不一致性: 这个很好理解，并不等于放入队列就是执行完成。</p>
-<blockquote>
-<p>其实还存在失败的可能性，如果保证顺序执行，且还能重复执行就是另个比较深的问题了。</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="五-应用场景"><a href="#五-应用场景" class="headerlink" title="五.应用场景"></a>五.应用场景</h2><ul>
-<li><p><strong>生产者不需要从消费者处获得反馈</strong></p>
-</li>
-<li><p><strong>容许暂时不一致性</strong></p>
-</li>
-<li><p><strong>产生副作用的效益高于成本</strong></p>
-</li>
-</ul>
+<h2 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h2><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install mysql</span><br></pre></td></tr></table></figure>
+<h2 id="启动mysql"><a href="#启动mysql" class="headerlink" title="启动mysql"></a>启动mysql</h2><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew services start mysql</span><br></pre></td></tr></table></figure>
+<h2 id="进入mysql"><a href="#进入mysql" class="headerlink" title="进入mysql"></a>进入mysql</h2><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+<p>初始情况下<code>root</code>角色没有密码，所以直接回车就进入了。</p>
+<h2 id="给自己的用户赋予权限"><a href="#给自己的用户赋予权限" class="headerlink" title="给自己的用户赋予权限"></a>给自己的用户赋予权限</h2><h3 id="创建账号"><a href="#创建账号" class="headerlink" title="创建账号"></a>创建账号</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER <span class="hljs-string">'username'</span>@<span class="hljs-string">'localhost'</span> IDENTIFIED BY <span class="hljs-string">'password'</span>;</span><br></pre></td></tr></table></figure>
+<p>中间的<code>username</code>和<code>password</code>替换成自己的东西。</p>
+<h3 id="给账号赋予权限"><a href="#给账号赋予权限" class="headerlink" title="给账号赋予权限"></a>给账号赋予权限</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL ON *.* TO <span class="hljs-string">'username'</span>@<span class="hljs-string">'localhost'</span>;</span><br></pre></td></tr></table></figure>
+<p>给指定<code>username</code>的账号赋予了所有的增删改权限。</p>
+<h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -p</span><br></pre></td></tr></table></figure>
+<p>然后输入密码就可以登录进入了，后续就自己玩吧~</p>
+<h2 id="额外的工具"><a href="#额外的工具" class="headerlink" title="额外的工具"></a>额外的工具</h2><p>可以考虑使用<code>mycli</code>工具，整体功能强大，操作方便。</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install mycli</span><br></pre></td></tr></table></figure>
+<h2 id="mycli安装完成"><a href="#mycli安装完成" class="headerlink" title="mycli安装完成"></a>mycli安装完成</h2><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mycli</span><br></pre></td></tr></table></figure>
+<p>输入相应的密码就可以了。</p>
 
         </div>
         
@@ -246,7 +205,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/消息队列/">消息队列</a>, <a class="has-link-grey -link" href="/tags/设计/">设计</a>
+                    <a class="has-link-grey -link" href="/tags/数据库/">数据库</a>
                 </div>
             </div>
         </div>
@@ -263,17 +222,10 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/06/06/database-basic/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">数据库基础概念</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/05/24/redis-basic/">
-                <span class="level-item">REDIS（一）：基础介绍</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/06/25/node-schedule-read/">
+                <span class="level-item">node-schedule的一些分析</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -368,25 +320,41 @@
                 目录
             </h3>
             <ul class="menu-list"><li>
-        <a class="is-flex" href="#一-消息模型">
+        <a class="is-flex" href="#安装mysql">
         <span class="has-mr-6">1</span>
-        <span>一.消息模型</span>
+        <span>安装mysql</span>
         </a></li><li>
-        <a class="is-flex" href="#二-使用场景">
+        <a class="is-flex" href="#启动mysql">
         <span class="has-mr-6">2</span>
-        <span>二.使用场景</span>
+        <span>启动mysql</span>
         </a></li><li>
-        <a class="is-flex" href="#三-可靠性">
+        <a class="is-flex" href="#进入mysql">
         <span class="has-mr-6">3</span>
-        <span>三.可靠性</span>
+        <span>进入mysql</span>
         </a></li><li>
-        <a class="is-flex" href="#四-优缺点">
+        <a class="is-flex" href="#给自己的用户赋予权限">
         <span class="has-mr-6">4</span>
-        <span>四.优缺点</span>
+        <span>给自己的用户赋予权限</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#创建账号">
+        <span class="has-mr-6">4.1</span>
+        <span>创建账号</span>
         </a></li><li>
-        <a class="is-flex" href="#五-应用场景">
+        <a class="is-flex" href="#给账号赋予权限">
+        <span class="has-mr-6">4.2</span>
+        <span>给账号赋予权限</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#登录">
         <span class="has-mr-6">5</span>
-        <span>五.应用场景</span>
+        <span>登录</span>
+        </a></li><li>
+        <a class="is-flex" href="#额外的工具">
+        <span class="has-mr-6">6</span>
+        <span>额外的工具</span>
+        </a></li><li>
+        <a class="is-flex" href="#mycli安装完成">
+        <span class="has-mr-6">7</span>
+        <span>mycli安装完成</span>
         </a></li></ul>
         </div>
     </div>
@@ -934,7 +902,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/og_image1.png" alt="消息队列（一）：基础介绍" height="28">
+                    <img src="/images/og_image1.png" alt="macos上安装mysql" height="28">
                 
                 </a>
                 <p class="is-size-7">
