@@ -19,7 +19,7 @@
 <meta property="og:description" content="docker是近两年几乎所有互联网开发者都会直接或者间接接触的东西。加上近期Kubernetes集群的出现，使得这个技术更方便的能够给我们带来帮助。近期serverless概念很火，基于这个原因我打算持续学习容器相关技术。本片会以一个初学者的视角，提供demo与一些常用指令，帮助你感受docker。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://zhaoleipeng.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-09-30T02:16:46.726Z">
+<meta property="og:updated_time" content="2019-09-30T02:30:12.131Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简单感受docker">
 <meta name="twitter:description" content="docker是近两年几乎所有互联网开发者都会直接或者间接接触的东西。加上近期Kubernetes集群的出现，使得这个技术更方便的能够给我们带来帮助。近期serverless概念很火，基于这个原因我打算持续学习容器相关技术。本片会以一个初学者的视角，提供demo与一些常用指令，帮助你感受docker。">
@@ -164,7 +164,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 608 个字)
+                    4 分钟 读完 (大约 623 个字)
                 </span>
                 
                 
@@ -185,14 +185,15 @@
             <p>docker是近两年几乎所有互联网开发者都会直接或者间接接触的东西。加上近期Kubernetes集群的出现，使得这个技术更方便的能够给我们带来帮助。近期serverless概念很火，基于这个原因我打算持续学习容器相关技术。本片会以一个初学者的视角，提供demo与一些常用指令，帮助你感受docker。</p>
 <a id="more"></a>
 <h2 id="安装dockerhub"><a href="#安装dockerhub" class="headerlink" title="安装dockerhub"></a>安装dockerhub</h2><p>可以通过 <a href="https://hub.docker.com" target="_blank" rel="noopener">https://hub.docker.com</a> 去下载docker安装包，下载比较慢的话，建议通过迅雷等加速下载。完成注册，打开对应的docker程序即可。</p>
-<h2 id="打包docker"><a href="#打包docker" class="headerlink" title="打包docker"></a>打包docker</h2><p>app.py</p>
+<h2 id="打包docker"><a href="#打包docker" class="headerlink" title="打包docker"></a>打包docker</h2><p>结果先行，整体文件目录应该如下</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls</span><br><span class="line">Dockerfile  app.py   requirements.txt</span><br></pre></td></tr></table></figure>
+<p>下面展示每个文件的内容</p>
+<p>app.py</p>
 <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask</span><br><span class="line"><span class="hljs-keyword">import</span> socket</span><br><span class="line"><span class="hljs-keyword">import</span> os</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@app.route('/')</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hello</span><span class="hljs-params">()</span>:</span></span><br><span class="line">    html = <span class="hljs-string">"&lt;h3&gt;Hello &#123;name&#125;!&lt;/h3&gt;"</span> \</span><br><span class="line">            <span class="hljs-string">"&lt;b&gt;Hostname:&lt;/b&gt; &#123;hostname&#125;&lt;br/&gt;"</span></span><br><span class="line">    <span class="hljs-keyword">return</span> html.format(name=os.getenv(<span class="hljs-string">"NAME"</span>, <span class="hljs-string">"world"</span>), hostname=socket.gethostname())</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">"__main__"</span>:</span><br><span class="line">    app.run(host=<span class="hljs-string">'0.0.0.0'</span>, port=<span class="hljs-number">80</span>)</span><br></pre></td></tr></table></figure>
 <p>requirements.txt</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Flask</span><br></pre></td></tr></table></figure>
 <p>Dockerfile</p>
 <figure class="highlight dockerfile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># 使用官方提供的 Python 开发镜像作为基础镜像</span></span><br><span class="line"><span class="hljs-keyword">FROM</span> python:<span class="hljs-number">2.7</span>-slim</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 将工作目录切换为 /app</span></span><br><span class="line"><span class="hljs-keyword">WORKDIR</span><span class="hljs-bash"> /app</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 将当前目录下的所有内容复制到 /app 下</span></span><br><span class="line"><span class="hljs-keyword">ADD</span><span class="hljs-bash"> . /app</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 使用 pip 命令安装这个应用所需要的依赖</span></span><br><span class="line"><span class="hljs-keyword">RUN</span><span class="hljs-bash"> pip install --trusted-host pypi.python.org -r requirements.txt</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 允许外界访问容器的 80 端口</span></span><br><span class="line"><span class="hljs-keyword">EXPOSE</span> <span class="hljs-number">80</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 设置环境变量</span></span><br><span class="line"><span class="hljs-keyword">ENV</span> NAME World</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># 设置容器进程为：python app.py，即：这个 Python 应用的启动命令</span></span><br><span class="line"><span class="hljs-keyword">CMD</span><span class="hljs-bash"> [<span class="hljs-string">"python"</span>, <span class="hljs-string">"app.py"</span>]</span></span><br></pre></td></tr></table></figure>
-<p>此时进行指令ls的结果是</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls</span><br><span class="line">Dockerfile  app.py   requirements.txt</span><br></pre></td></tr></table></figure>
 <p>下面就可以build这个镜像了</p>
 <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker build -t helloworld .</span><br></pre></td></tr></table></figure>
 <h2 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h2><ol>
