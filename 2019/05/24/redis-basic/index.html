@@ -7,21 +7,21 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>REDIS（一）：基础介绍 - 赵磊鹏的小站</title>
+<title>Redis（一）：基础介绍 - 赵磊鹏的小站</title>
 
 
     <meta name="description" content="作为最常用的非关系型数据库。它的数据结构设计与一些使用方法，都是很有必要好好观看一下。">
 <meta name="keywords" content="数据库,redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="REDIS（一）：基础介绍">
+<meta property="og:title" content="Redis（一）：基础介绍">
 <meta property="og:url" content="https://zhaoleipeng.github.io/2019/05/24/redis-basic/index.html">
 <meta property="og:site_name" content="赵磊鹏的小站">
 <meta property="og:description" content="作为最常用的非关系型数据库。它的数据结构设计与一些使用方法，都是很有必要好好观看一下。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://zhaoleipeng.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-09-30T02:26:20.537Z">
+<meta property="og:updated_time" content="2019-10-09T02:49:47.424Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="REDIS（一）：基础介绍">
+<meta name="twitter:title" content="Redis（一）：基础介绍">
 <meta name="twitter:description" content="作为最常用的非关系型数据库。它的数据结构设计与一些使用方法，都是很有必要好好观看一下。">
 <meta name="twitter:image" content="https://zhaoleipeng.github.io/images/og_image.png">
 
@@ -97,7 +97,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/og_image1.png" alt="REDIS（一）：基础介绍" height="28">
+                <img src="/images/og_image1.png" alt="Redis（一）：基础介绍" height="28">
             
             </a>
         </div>
@@ -174,7 +174,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                REDIS（一）：基础介绍
+                Redis（一）：基础介绍
             
         </h1>
         <div class="content">
@@ -499,7 +499,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        9
+                        10
                     </p>
                 </div>
             </div>
@@ -519,7 +519,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        13
+                        14
                     </p>
                 </div>
             </div>
@@ -577,7 +577,7 @@
                 <span class="level-item">技术</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">7</span>
+                <span class="level-item tag">8</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/日记/">
@@ -607,7 +607,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/创业/" style="font-size: 10px;">创业</a> <a href="/tags/容器/" style="font-size: 10px;">容器</a> <a href="/tags/思路/" style="font-size: 10px;">思路</a> <a href="/tags/数据库/" style="font-size: 20px;">数据库</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/源码/" style="font-size: 10px;">源码</a> <a href="/tags/笔记/" style="font-size: 10px;">笔记</a> <a href="/tags/索引/" style="font-size: 10px;">索引</a> <a href="/tags/观点/" style="font-size: 10px;">观点</a> <a href="/tags/设计/" style="font-size: 10px;">设计</a>
+        <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/创业/" style="font-size: 10px;">创业</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/容器/" style="font-size: 10px;">容器</a> <a href="/tags/思路/" style="font-size: 10px;">思路</a> <a href="/tags/数据库/" style="font-size: 20px;">数据库</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/源码/" style="font-size: 10px;">源码</a> <a href="/tags/笔记/" style="font-size: 10px;">笔记</a> <a href="/tags/索引/" style="font-size: 10px;">索引</a> <a href="/tags/观点/" style="font-size: 10px;">观点</a> <a href="/tags/设计/" style="font-size: 10px;">设计</a>
     </div>
 </div>
 
@@ -621,6 +621,19 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-09T02:48:25.000Z">2019-10-09</time></div>
+                    <a href="/2019/10/09/浏览器window对象探究/" class="title has-link-black-ter is-size-6 has-text-weight-normal">浏览器window对象研究</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/技术/">技术</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -674,19 +687,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-06T09:24:27.000Z">2019-06-06</time></div>
-                    <a href="/2019/06/06/database-basic/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据库基础概念</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/技术/">技术</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -698,6 +698,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/09/">
@@ -769,6 +780,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/创业/">
                         <span class="tag">创业</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/前端/">
+                        <span class="tag">前端</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -863,6 +881,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-09T02:48:25.000Z">2019-10-09</time></div>
+                    <a href="/2019/10/09/浏览器window对象探究/" class="title has-link-black-ter is-size-6 has-text-weight-normal">浏览器window对象研究</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/技术/">技术</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-30T01:51:10.000Z">2019-09-30</time></div>
                     <a href="/2019/09/30/docker-指令/" class="title has-link-black-ter is-size-6 has-text-weight-normal">简单感受docker</a>
                     <p class="is-size-7 is-uppercase">
@@ -911,19 +942,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-06T09:24:27.000Z">2019-06-06</time></div>
-                    <a href="/2019/06/06/database-basic/" class="title has-link-black-ter is-size-6 has-text-weight-normal">数据库基础概念</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/技术/">技术</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -935,6 +953,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/09/">
@@ -1006,6 +1035,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/创业/">
                         <span class="tag">创业</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/前端/">
+                        <span class="tag">前端</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1090,7 +1126,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/og_image1.png" alt="REDIS（一）：基础介绍" height="28">
+                    <img src="/images/og_image1.png" alt="Redis（一）：基础介绍" height="28">
                 
                 </a>
                 <p class="is-size-7">
