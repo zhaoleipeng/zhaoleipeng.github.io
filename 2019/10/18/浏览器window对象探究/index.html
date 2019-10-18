@@ -14,12 +14,12 @@
 <meta name="keywords" content="前端">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浏览器window对象研究">
-<meta property="og:url" content="https://zhaoleipeng.github.io/2019/10/09/浏览器window对象探究/index.html">
+<meta property="og:url" content="https://zhaoleipeng.github.io/2019/10/18/浏览器window对象探究/index.html">
 <meta property="og:site_name" content="赵磊鹏的小站">
 <meta property="og:description" content="近期因为变成前端岗位，开始接触前端的开发。过程中遇到了window对象，比较感兴趣，记录一下。此次遇到的api指令大概就几个，所以先挑几个写一下，后续再有用到时继续补充。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://zhaoleipeng.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-10-18T06:59:29.576Z">
+<meta property="og:updated_time" content="2019-10-18T07:35:51.799Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器window对象研究">
 <meta name="twitter:description" content="近期因为变成前端岗位，开始接触前端的开发。过程中遇到了window对象，比较感兴趣，记录一下。此次遇到的api指令大概就几个，所以先挑几个写一下，后续再有用到时继续补充。">
@@ -154,7 +154,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-10-09T02:48:25.000Z">2019-10-09</time>
+                <time class="level-item has-text-grey" datetime="2019-10-18T02:48:25.000Z">2019-10-18</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/技术/">技术</a>
@@ -164,7 +164,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 649 个字)
+                    4 分钟 读完 (大约 648 个字)
                 </span>
                 
                 
@@ -185,24 +185,27 @@
             <p>近期因为变成前端岗位，开始接触前端的开发。过程中遇到了window对象，比较感兴趣，记录一下。此次遇到的api指令大概就几个，所以先挑几个写一下，后续再有用到时继续补充。</p>
 <a id="more"></a>
 <hr>
-<h2 id="window-open"><a href="#window-open" class="headerlink" title="window.open"></a>window.open</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> windowObjectReference = <span class="hljs-built_in">window</span>.open(strUrl, strWindowName, [strWindowFeatures]);</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>strUrl === 要在新打开的窗口中加载的URL。</p>
-<p>strWindowName === 新窗口的名称。</p>
-<p>strWindowFeatures === 一个可选参数，列出新窗口的特征(大小，位置，滚动条等)作为一个DOMString。</p>
-</blockquote>
+<h2 id="window-open"><a href="#window-open" class="headerlink" title="window.open"></a>window.open</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> windowObjectReference</span><br><span class="line">= <span class="hljs-built_in">window</span>.open(strUrl, strWindowName, [strWindowFeatures]);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>strUrl === 要在新打开的窗口中加载的URL。</p>
+</li>
+<li><p>strWindowName === 新窗口的名称。</p>
+</li>
+<li><p>strWindowFeatures === 一个可选参数，列出新窗口的特征(大小，位置，滚动条等)作为一个DOMString。</p>
+</li>
+</ul>
 <h3 id="参数与返回值"><a href="#参数与返回值" class="headerlink" title="参数与返回值"></a>参数与返回值</h3><ul>
 <li><p><code>WindowObjectReference</code></p>
 <p>  打开的新窗口的引用。如果调用失败，返回值会是<code>null</code>。如果父子窗口满足”同源策略”，可以通过引用访问新窗口的属性或者方法。</p>
 <blockquote>
-<p><em>比较简单的例子就是，使用该对象<code>.close()</code>就可以将弹出的窗口关闭</em></p>
+<p>比较简单的例子就是，使用该对象<code>.close()</code>就可以将弹出的窗口关闭</p>
 </blockquote>
 </li>
 <li><p><code>strUrl</code></p>
 <p>  新窗口需要载入的url地址。可以是图片文件或者html页面都可以。</p>
 <blockquote>
 <p>如果strUrl为空，打开的窗口将会是带有默认工具栏的空白窗口（加载about:blank）</p>
-<p>PS: 调用window.open()方法以后，远程 URL 不会被立即载入，载入过程是异步的。（实际加载这个URL的时间推迟到当前脚本块执行结束之后。窗口的创建和相关资源的加载异步地进行。）</p>
+<p>调用window.open()方法以后，远程 URL 不会被立即载入，载入过程是异步的。（实际加载这个URL的时间推迟到当前脚本块执行结束之后。窗口的创建和相关资源的加载异步地进行。）</p>
 </blockquote>
 </li>
 <li><p><code>strWindowName</code></p>
@@ -450,8 +453,8 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-09T02:48:25.000Z">2019-10-09</time></div>
-                    <a href="/2019/10/09/浏览器window对象探究/" class="title has-link-black-ter is-size-6 has-text-weight-normal">浏览器window对象研究</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-18T02:48:25.000Z">2019-10-18</time></div>
+                    <a href="/2019/10/18/浏览器window对象探究/" class="title has-link-black-ter is-size-6 has-text-weight-normal">浏览器window对象研究</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/技术/">技术</a>
                     </p>
@@ -705,8 +708,8 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-09T02:48:25.000Z">2019-10-09</time></div>
-                    <a href="/2019/10/09/浏览器window对象探究/" class="title has-link-black-ter is-size-6 has-text-weight-normal">浏览器window对象研究</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-18T02:48:25.000Z">2019-10-18</time></div>
+                    <a href="/2019/10/18/浏览器window对象探究/" class="title has-link-black-ter is-size-6 has-text-weight-normal">浏览器window对象研究</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/技术/">技术</a>
                     </p>
