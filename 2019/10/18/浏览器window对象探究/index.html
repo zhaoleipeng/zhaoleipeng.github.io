@@ -19,7 +19,7 @@
 <meta property="og:description" content="近期因为变成前端岗位，开始接触前端的开发。过程中遇到了window对象，比较感兴趣，记录一下。此次遇到的api指令大概就几个，所以先挑几个写一下，后续再有用到时继续补充。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://zhaoleipeng.github.io/images/og_image.png">
-<meta property="og:updated_time" content="2019-10-18T07:35:51.799Z">
+<meta property="og:updated_time" content="2019-10-23T02:20:21.736Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器window对象研究">
 <meta name="twitter:description" content="近期因为变成前端岗位，开始接触前端的开发。过程中遇到了window对象，比较感兴趣，记录一下。此次遇到的api指令大概就几个，所以先挑几个写一下，后续再有用到时继续补充。">
@@ -164,7 +164,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 648 个字)
+                    7 分钟 读完 (大约 1018 个字)
                 </span>
                 
                 
@@ -223,6 +223,24 @@
 </blockquote>
 </li>
 </ul>
+<h2 id="windows-close"><a href="#windows-close" class="headerlink" title="windows.close"></a>windows.close</h2><h3 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h3><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">window</span>.close()</span><br></pre></td></tr></table></figure>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><blockquote>
+<p><strong>该方法只能由 Window.open() 方法打开的窗口的 window 对象来调用。如果一个窗口不是由脚本打开的，那么，在调用该方法时，JavaScript 控制台会出现类似下面的错误：不能使用脚本关闭一个不是由脚本打开的窗口。 或 Scripts may not close windows that were not opened by script. 。</strong></p>
+</blockquote>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>该方法可以关闭一个由window.open()方法打开的窗口</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> openedWindow;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">openWindow</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">  openedWindow = <span class="hljs-built_in">window</span>.open(<span class="hljs-string">'moreinfo.htm'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">closeOpenedWindow</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">  openedWindow.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="相关研究"><a href="#相关研究" class="headerlink" title="相关研究"></a>相关研究</h3><p>背景：因为下载相关找到这些内容。如何实现一个下载操作呢。</p>
+<ol>
+<li><p>location.href = url</p>
+</li>
+<li><p>创建一个a标签，获取a标签，然后触发点击事件。</p>
+</li>
+<li><p>使用iframe，创建一个隐藏的iframe，然后修改src地址，触发下载。</p>
+</li>
+</ol>
+<p>问题： 那么触发下载能拿到回调么。原先是想触发下载后自动关闭页面的。</p>
+<p><strong>经过一圈的查询与自己的实验，无论上述任何一种方式，都无法做到启动下载后，在触发关闭操作。</strong> 目前做法是延迟1秒后关闭页面，写死的时间。后续有更好的方法，再在此处修改。</p>
+<p>如果无意间你看到这篇，有更好的方法希望能给我发邮件 <a href="mailto:zlpdeveloperll@gmail.com" target="_blank" rel="noopener">zlpdeveloperll@gmail.com</a>。</p>
 
         </div>
         
@@ -356,6 +374,26 @@
         <a class="is-flex" href="#参数与返回值">
         <span class="has-mr-6">1.2</span>
         <span>参数与返回值</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#windows-close">
+        <span class="has-mr-6">2</span>
+        <span>windows.close</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#语法-1">
+        <span class="has-mr-6">2.1</span>
+        <span>语法</span>
+        </a></li><li>
+        <a class="is-flex" href="#注意事项">
+        <span class="has-mr-6">2.2</span>
+        <span>注意事项</span>
+        </a></li><li>
+        <a class="is-flex" href="#例子">
+        <span class="has-mr-6">2.3</span>
+        <span>例子</span>
+        </a></li><li>
+        <a class="is-flex" href="#相关研究">
+        <span class="has-mr-6">2.4</span>
+        <span>相关研究</span>
         </a></li></ul></li></ul>
         </div>
     </div>
